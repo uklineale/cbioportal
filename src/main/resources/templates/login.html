@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${skin_title}"></title>
+</head>
+<body>
+    <center>
+        <div id="page_wrapper">
+            <table width="90%" cellpadding="0px" cellspacing="5px" border="0px" style="margin-left:5%;padding:20px;text-align:center">
+                <tr valign="top">
+                    <td colspan="3">
+                        <div id="login_header_wrapper">
+                            <div id="login_header_top" style="height: 50px">
+                                <a id="cbioportal-logo" href="./">
+                                    <img src="/images/cbioportal_logo.png"
+                                        alt="cBioPortal Logo"
+                                        style="height: 50px" />
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr valign="top">
+                    <td>
+                        <div>
+                            <div th:if="${logout_success}"
+                                 class="ui-state-highlight ui-corner-all"
+                                 style="padding: 0 .7em">
+                                <p>
+                                    <span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em"></span>
+                                    <strong>You are now signed out. It is recommended that you close your browser to complete the termination of
+                                        this session.</strong>
+                                </p>
+                            </div>
+                            
+                            <div th:if="${login_error}"
+                                 class="ui-state-highlight ui-corner-all"
+                                 style="padding: 0 .7em">
+                                <p>
+                                <span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em"></span>
+                                <strong>You are not authorized to access this resource.&nbsp;
+                                        <span th:text="${skin_login_contact_html}"></span>
+                                </strong></p>
+                            </div>
+    
+                            <br>
+                        
+                            <table cellspacing="2px" width="100%">
+                                <tr>
+                                    <td>
+                                        <p>
+                                            <!-- TODO replace URL with parameterized server address -->
+                                            <span style="color:#333333;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px">
+                                                Welcome to cBioPortal - sign in with your Google or Microsoft account to store your <a href="https://www.cbioportal.org/tutorials#virtual-studies" target="_blank">virtual studies</a> and <a href="https://www.cbioportal.org/tutorials#group-comparison" target="_blank">groups</a>. This will allow you to access your studies and groups from any computer, and cBioPortal will also remember your study view charts preferences for each study (i.e. order of the charts, type of charts and visibility). Login is optional and not required to access any of the other features of cBioPortal.
+                                              </span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <p>
+                                        <td th:if="${show_saml}"
+                                        th:insert="~{login_options :: saml}" />
+                                    </p>
+                                    <p>
+                                        <td th:if="${show_google}"
+                                        th:insert="~{login_options :: google}" />
+                                    </p>
+                                    <p>
+                                        <td th:if="${show_microsoft}"
+                                        th:insert="~{login_options :: microsoft}" />
+                                    </p>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <div th:replace="footer" />
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+</body>
+</html>
